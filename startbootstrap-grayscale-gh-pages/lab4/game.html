@@ -1,0 +1,103 @@
+<html>
+	<body>
+		<h1 id="time"></h1>
+		<h1 id="score">0</h1>
+        <canvas height="500px" width="1000px" id="canvas"></canvas>
+		<button on-click="start();">start</button>
+
+  	</body>
+  	<script type="text/javascript">
+  		var c = document.getElementById("canvas");
+		var ctx = c.getContext("2d");
+		var startX = 0;
+    	var startY = 0;
+    	var fiveMinutes = 10 ;
+    	var x = Math.floor((Math.random() * 300) + 1);
+    	var y = Math.floor((Math.random() * 300) + 1);
+    	var timer = 10 ;
+    	var duration;
+    	var minutes;
+    	var seconds;
+    	var Score = 0;
+    	ctx.beginPath();
+		ctx.rect(x, y, 150, 100);
+		ctx.stroke();
+		var game = 0;
+		window.onload = function () {
+    		var display = document.querySelector('#time');
+    		var header = document.querySelector('#score');
+    		startTimer(fiveMinutes, display, header);
+    		
+		    	
+    		
+		};
+		function start(){
+
+    	timer = 10 ;
+		};
+		
+		function startTimer(duration, display, header) {
+		    
+		    setInterval(function () {
+		        minutes = parseInt(timer / 60, 10)
+		        seconds = parseInt(timer % 60, 10);
+
+		        minutes = minutes < 10 ? "0" + minutes : minutes;
+		        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		        display.textContent = minutes + ":" + seconds;
+		        setInterval(function(){header.textContent = Score;},100);
+		        
+		        if (--timer < 0 ) {
+		        	ctx.clearRect(0, 0, 1000, 1000);
+		        	save();
+		        	game = 0;}
+
+		        	if( timer <0 && game==1  ){ 
+		        	
+		        	 
+		            
+		    	}
+
+    		}, 1000);
+		}
+		
+		
+		
+		function save(){
+			
+			var userString = Score;
+			localStorage.setItem("userscore",  userString);
+
+
+		}
+		
+		c.onmousedown = function(e) {
+
+			game = 1;
+		    startX = e.pageX - this.offsetLeft;
+		    startY = e.pageY - this.offsetTop;
+		    if(timer < 0 ) timer = 10 ;
+		    console.log("x = "+ startX + " y = "+ startY);
+		     setInterval(function () {
+			    if( startX >= x && startX <= (x + 150) &&  startY >= y && startY <= (y + 150) ){
+			    	Score++;
+			    	 
+			    	console.log("element has been clicked "  + Score);
+			    	
+			    	ctx.clearRect(0, 0, 1000, 1000);
+			    	
+			    	 x = Math.floor((Math.random() * 300) + 1);
+	    			 y = Math.floor((Math.random() * 300) + 1);
+	    			 ctx.beginPath();
+			        ctx.rect(x, y, 150, 100);
+					ctx.stroke();
+
+					
+			    }
+
+			}, 100);
+		};
+
+  	</script>
+</html>

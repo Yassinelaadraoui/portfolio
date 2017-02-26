@@ -1,0 +1,77 @@
+<html>
+<body onload="">
+        <canvas id="canvas"></canvas>
+		<canvas id="drawCanvas"></canvas>
+
+    </body>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+   var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var drawCanvas = document.getElementById("drawCanvas");
+   var  drawCtx = drawCanvas.getContext("2d");
+   var painting = false;
+    var lastX = 0;
+   var lastY = 0;
+   var curX = 0 ; 
+  var  curY = 0;
+    var startX = 0;
+    var startY = 0;
+    var lineThickness = 1;
+ canvas.height = 600;
+ canvas.width = 600;
+ drawCanvas.height = 600;
+ drawCanvas.width = 600;
+
+drawCanvas.onmousedown = function(e) {
+    startX = e.pageX - this.offsetLeft;
+    startY = e.pageY - this.offsetTop;
+    painting = true;
+
+};
+
+drawCanvas.onmouseup = function(e){
+    painting = false;
+
+    ctx.strokeStyle = "#000";
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(lastX, lastY);
+    ctx.stroke();
+    
+    drawCtx.clearRect(0, 0, 600, 600);
+}
+
+drawCanvas.onmouseclick = function(e) {
+    
+    startX = e.pageX - this.offsetLeft;
+    startY = e.pageY - this.offsetTop;
+
+    painting = true;
+};
+
+    
+drawCanvas.onmousemove = function(e) {
+    if(painting){
+        lastX = e.pageX - this.offsetLeft;
+        lastY = e.pageY - this.offsetTop;
+        drawCtx.clearRect(0,0,600,600);
+        drawCtx.beginPath();
+        drawCtx.moveTo(startX ,startY );
+        drawCtx.lineTo(lastX, lastY);
+        drawCtx.stroke();
+    }
+}
+    
+    </script>
+    <style type="text/css">
+    	#drawCanvas{
+    position:absolute;
+    top:0;
+    left:0;
+}
+canvas{border:1px solid #000;}
+
+    </style>
+    
+    </html>

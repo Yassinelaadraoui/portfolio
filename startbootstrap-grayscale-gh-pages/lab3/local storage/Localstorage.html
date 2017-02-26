@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css-reset.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="script.js"></script>
+		<script >
+		
+	function newElement() {
+		  localStorage.setItem('value', document.getElementById('input').value);
+		  var li = document.createElement("li");
+		  var inputValue = document.getElementById("input").value;
+		  var t = document.createTextNode(inputValue);
+		  
+
+		  li.appendChild(t);
+		  
+		  document.getElementById("unl").appendChild(li);
+		  
+		  document.getElementById("input").value = "";
+
+		  var span = document.createElement("SPAN");
+		  var txt = document.createTextNode();
+		  
+		  span.appendChild(txt);
+		  li.appendChild(span);
+	}
+
+		</script>
+	</head>
+	<body>
+		<div >
+			<div  class="header">
+				  <h2>My To Do List</h2>
+				  <input type="text" id="input" >
+				  <button onclick="newElement()">Add</button>
+			</div>
+
+			<ul id="unl">
+				  <li>Yassine</li>
+				  
+				  <li>Eminem</li>
+				  <li>2 pac</li>
+				  <li>Elon</li>
+				  <li>Bill</li>
+			</ul>
+		</div>
+
+	</body>
+
+</html>
